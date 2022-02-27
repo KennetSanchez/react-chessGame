@@ -26,13 +26,24 @@
         //Class for the bad ones: bi bi-x
 
            const App = () =>(
-            <Timer/>
+            <Menu/>
            )
+
+           class Menu extends React.Component{
+             render(){
+               return(
+                 <div class = "container"> 
+                  <label>sus</label>
+                  <button onClick = ""> Start a new game! </button>
+                 </div>
+               )
+             }
+           }
 
            class Square extends React.Component {
              constructor(props){
                  super(props);
-                 this.state = {highlighted : 0, iconClass: ""};
+                 this.state = {highlighted : 0, iconClass : ""};
              }
              
              render() {
