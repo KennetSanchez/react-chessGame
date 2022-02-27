@@ -14,6 +14,8 @@
     <!-- Don't use this in production: -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.jsdelivr.net/remarkable/1.7.1/remarkable.min.js"></script>
+
+    <link rel="stylesheet" href="Style.css">
     <title>Chess game</title>
   </head>
   <body>
@@ -32,9 +34,11 @@
            class Menu extends React.Component{
              render(){
                return(
-                 <div class = "container"> 
-                  <label>sus</label>
-                  <button onClick = ""> Start a new game! </button>
+                 <div id = "menu" class = "container">
+                  
+                  <label> Remaining time: <Timer/></label>
+                  <br/>
+                  <button id = "startANewGameBtn" onClick = ""> Start a new game! </button>
                  </div>
                )
              }
@@ -43,7 +47,7 @@
            class Square extends React.Component {
              constructor(props){
                  super(props);
-                 this.state = {highlighted : 0, iconClass : ""};
+                 this.state = {highlighted : 0, iconClass : "bi bi-question"};
              }
              
              render() {
@@ -58,7 +62,7 @@
         class Timer extends React.Component {
             constructor(props){
               super(props);
-              this.state = {minutes: 1,seconds: 0};
+              this.state = {minutes: 1, seconds: 0, steticZero: "0"};
             }
             tick() {
                 this.setState(state => ({
@@ -73,6 +77,7 @@
             }
             componentDidMount() {
                 this.interval = setInterval(() => this.tick(), 1000);
+                this.state.steticZero = "";
             }
 
             componentWillUnmount() {
@@ -82,7 +87,7 @@
             render() {
                 return (
                 <div>
-                    {this.state.minutes}:{this.state.seconds}
+                    {this.state.minutes}:{this.state.seconds}{this.state.steticZero}
                 </div>
                 );
             }
