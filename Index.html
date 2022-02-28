@@ -24,7 +24,10 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.jsdelivr.net/remarkable/1.7.1/remarkable.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
 
     <link rel="stylesheet" href="Style.css" />
     <title>Chess game</title>
@@ -34,84 +37,164 @@
       <HelloMesage />
     </div>
     <script type="text/babel">
+      //Class for the good ones: bi bi-check
+      //Class for the bad ones: bi bi-x
 
-        //Class for the good ones: bi bi-check
-        //Class for the bad ones: bi bi-x
+      const App = () => <FullScreen />;
 
-           const App = () =>(
-            <Menu/>
-           )
+      class FullScreen extends React.Component {
+        render() {
+          return (
+            <div className = "container">
+              <Board />
+              <Menu />
+            </div>
+          );
+        }
+      }
 
-           class Menu extends React.Component{
-             render(){
-               return(
-                 <div id = "menu" className = "container">
-                  <label> Remaining time: <Timer/></label>
-                  <br/>
-                  <button id = "startANewGameBtn"> Start a new game! </button>
-                 </div>
-               )
-             }
-           }
+      class Board extends React.Component {
+        render() {
+          return( 
+            <div id = "boardDiv" className="container">            
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+              <Square></Square>
+            </div>
+            );
+        }
+      }
 
-           class Square extends React.Component {
-             constructor(props){
-                 super(props);
-                 this.state = {highlighted : 0, iconClass : "bi bi-question", position: ""};
+      class Menu extends React.Component {
+        render() {
+          return (
+            <div id="menu" className="container">
+              <label>               
+                Remaining time: <Timer />
+              </label>
+              <br />
+              <button id="startANewGameBtn"> Start a new game! </button>
+            </div>
+          );
+        }
+      }
 
-             }
-
-             render() {
-                return (
-                 <div className="box">
-                    <i id = "icon" className = {this.state.iconClass}/>
-                 </div>
-                );
-
-
-            }
+      class Square extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            highlighted: 0,
+            iconClass: "bi bi-question",
+            position: "",
+          };
         }
 
-        class Timer extends React.Component {
-            constructor(props){
-              super(props);
-              this.state = {minutes: 1, seconds: 0, steticZero: "0"};
-            }
-            tick() {
-                this.setState(state => ({
-                seconds: state.seconds -1
-                }));
-                if(this.state.seconds<0){
-                    this.setState(state => ({
-                        seconds: 59,
-                        minutes: state.minutes -1
-                    }));
-                }
-            }
-            componentDidMount() {
-                this.interval = setInterval(() => this.tick(), 1000);
-                this.state.steticZero = "";
-            }
+        render() {
+          return (
+            <div className="box">
+              <i id="icon" className={this.state.iconClass} />
+            </div>
+          );
+        }
+      }
 
-            componentWillUnmount() {
-                clearInterval(this.interval);
-            }
-
-            render() {
-                return (
-                <div>
-                    {this.state.minutes}:{this.state.seconds}{this.state.steticZero}
-                </div>
-                );
-            }
-
+      class Timer extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { minutes: 1, seconds: 0, steticZero: "0" };
+        }
+        tick() {
+          this.setState((state) => ({
+            seconds: state.seconds - 1,
+          }));
+          if (this.state.seconds < 0) {
+            this.setState((state) => ({
+              seconds: 59,
+              minutes: state.minutes - 1,
+            }));
+          }
+        }
+        componentDidMount() {
+          this.interval = setInterval(() => this.tick(), 1000);
+          this.state.steticZero = "";
         }
 
+        componentWillUnmount() {
+          clearInterval(this.interval);
+        }
 
-      ReactDOM.render(
-        <App/>,
-        document.getElementById('root')
-      );
+        render() {
+          return (
+            <div>
+              {this.state.minutes}:{this.state.seconds}
+              {this.state.steticZero}
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
     </script>
   </body>
 </html>
