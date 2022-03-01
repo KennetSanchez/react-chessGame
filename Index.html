@@ -210,6 +210,9 @@
           this.setState((state) => ({
             seconds: state.seconds - 1,
           }));
+          if(this.state.minutes==0 && this.state.seconds==0){
+              clearInterval(this.interval);
+            }
           if (this.state.seconds < 0) {
             this.setState((state) => ({
               seconds: 59,
