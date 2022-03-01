@@ -46,8 +46,9 @@
         render() {
           return (
             <div className = "container">
-              <Board />
-              <Menu />
+              <Board/>
+              <Menu/>
+              <RandomId/>
             </div>
           );
         }
@@ -133,6 +134,34 @@
 
             </div>
             );
+        }
+      }
+
+      class RandomId extends React.Component{
+        constructor(props) {
+          super(props);
+          this.state = { text:"" };
+        }
+        generateRandom(){
+          let a = Math.floor(Math.random() * 9);
+          let b = Math.floor(Math.random() * 9);
+          let c = String.fromCharCode(b+65);
+          if(a==0){
+            a=1;
+          }
+          this.setState(state => ({
+                text: c+a
+          }));
+        }
+        componentDidMount() {
+          this.generateRandom();
+        }
+        render() {
+          return (
+            <div>
+               {this.state.text}
+            </div>
+          );
         }
       }
 
