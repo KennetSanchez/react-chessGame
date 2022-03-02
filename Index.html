@@ -48,7 +48,6 @@
             <div className = "container">
               <Board/>
               <Menu/>
-              <RandomId/>
             </div>
           );
         }
@@ -137,35 +136,23 @@
         }
       }
 
-      class RandomId extends React.Component{
-        constructor(props) {
-          super(props);
-          this.state = { text:"" };
-        }
-        generateRandom(){
+      class Menu extends React.Component {
+        changeBox(){
+          let box = document.getElementById("boxToFind");
+          
           let a = Math.floor(Math.random() * 9);
           let b = Math.floor(Math.random() * 9);
           let c = String.fromCharCode(b+65);
           if(a==0){
             a=1;
           }
-          this.setState(state => ({
-                text: c+a
-          }));
-        }
-        componentDidMount() {
-          this.generateRandom();
-        }
-        render() {
-          return (
-            <div>
-               {this.state.text}
-            </div>
-          );
-        }
-      }
 
-      class Menu extends React.Component {
+          box.textContent = a+c;
+          document.getElementById("startANewGameBtn").disabled = true;
+        }
+        
+        
+
         render() {
           return (
             <div id="menu" className="container">
@@ -173,10 +160,14 @@
                 Remaining time: <Timer />
               </label>
               <br />
-              <label>
-                
-              </label>
-              <button id="startANewGameBtn"> Start a new game! </button>
+              <br/>
+
+              <label>Box to find: <br/><label id = "boxToFind"/></label>
+
+              <br/>
+              <br/>
+
+              <button id="startANewGameBtn" onClick = {this.changeBox}> Start a new game! </button>
             </div>
           );
         }

@@ -28,3 +28,7 @@ i{
   grid-column: 1;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
+
+#boxToFind{
+  font-weight: bolder;
+}
