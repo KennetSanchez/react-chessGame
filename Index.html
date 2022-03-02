@@ -70,7 +70,7 @@
 
               <Square id ="boxA2"></Square>
               <Square id ="boxB2"></Square>
-              <Square  id ="boxC2"></Square>
+              <Square id ="boxC2"></Square>
               <Square id ="boxD2"></Square>
               <Square id ="boxE2"></Square>
               <Square id ="boxF2"></Square>
@@ -147,7 +147,7 @@
             a=1;
           }
 
-          box.textContent = a+c;
+          box.textContent = c+a;
           document.getElementById("startANewGameBtn").disabled = true;
         }
         
@@ -179,13 +179,19 @@
           this.state = {
             highlighted: 0,
             iconClass: "bi bi-question",
-            position: "",
           };
+        }
+
+        divClicked(){
+          let boxToFind = document.getElementById("boxToFind")
+
+          //Aquí se necesita verificar que el id del elemento que haya causado el evento(al que le hayan dado click) 
+          // tenga el mismo id que tiene escrito en el label de boxToFind. (Los id's de las casillas van "box*Valor_del_label*")
         }
 
         render() {
           return (
-            <div className="box">
+            <div id = "box" className="box" onClick={this.divClicked}>
               <i id="icon" className={this.state.iconClass} />
             </div>
           );
