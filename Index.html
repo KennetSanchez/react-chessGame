@@ -116,14 +116,14 @@
                   this.state.score = this.state.score+1;
                   this.state.lastClick = this.state.seconds;
                   const info = {
-                    text: "Requested: "+this.state.random+" Time: "+this.state.clickTime+" ✓",
+                    text: "Requested: "+this.state.random+" Time: "+this.state.clickTime+" seconds Answer: ✓",
                     index: this.state.turn
                   }
                   this.state.register = this.state.register.concat(info);
               }
               else{
                   const info = {
-                    text: "Requested: "+this.state.random+" Time: "+this.state.clickTime+" X",
+                    text: "Requested: "+this.state.random+" Time: "+this.state.clickTime+" seconds Answer: X",
                     index: this.state.turn
                   }
                   this.state.register = this.state.register.concat(info);
@@ -142,154 +142,156 @@
         render() {
           return( 
             <div className = "container">
-            <div id = "boardDiv" className="container"> 
+              <div id = "boardDiv" className="container"> 
+                  
+                <div id = "box" className="box">
+                  <i>8</i>
+                </div>
+                {this.createSquare("boxA8")}
+                {this.createSquare("boxB8")}
+                {this.createSquare("boxC8")}
+                {this.createSquare("boxD8")}
+                {this.createSquare("boxE8")}
+                {this.createSquare("boxF8")}
+                {this.createSquare("boxG8")}
+                {this.createSquare("boxH8")}
                 
-              <div id = "box" className="box">
-                <i>8</i>
+
+                <div id = "box" className="box">
+                  <i>7</i>
+                </div> 
+                {this.createSquare("boxA7")}
+                {this.createSquare("boxB7")}
+                {this.createSquare("boxC7")}
+                {this.createSquare("boxD7")}
+                {this.createSquare("boxE7")}
+                {this.createSquare("boxF7")}
+                {this.createSquare("boxG7")}
+                {this.createSquare("boxH7")}
+
+                <div id = "box" className="box">
+                  <i>6</i>
+                </div> 
+                {this.createSquare("boxA6")}
+                {this.createSquare("boxB6")}
+                {this.createSquare("boxC6")}
+                {this.createSquare("boxD6")}
+                {this.createSquare("boxE6")}
+                {this.createSquare("boxF6")}
+                {this.createSquare("boxG6")}
+                {this.createSquare("boxH6")}
+
+                <div id = "box" className="box">
+                  <i>5</i>
+                </div> 
+                {this.createSquare("boxA5")}
+                {this.createSquare("boxB5")}
+                {this.createSquare("boxC5")}
+                {this.createSquare("boxD5")}
+                {this.createSquare("boxE5")}
+                {this.createSquare("boxF5")}
+                {this.createSquare("boxG5")}
+                {this.createSquare("boxH5")}
+                
+
+                <div id = "box" className="box">
+                  <i>4</i>
+                </div>
+                {this.createSquare("boxA4")}
+                {this.createSquare("boxB4")}
+                {this.createSquare("boxC4")}
+                {this.createSquare("boxD4")}
+                {this.createSquare("boxE4")}
+                {this.createSquare("boxF4")}
+                {this.createSquare("boxG4")}
+                {this.createSquare("boxH4")}
+                
+
+                <div id = "box" className="box">
+                  <i>3</i>
+                </div>
+                {this.createSquare("boxA3")}
+                {this.createSquare("boxB3")}
+                {this.createSquare("boxC3")}
+                {this.createSquare("boxD3")}
+                {this.createSquare("boxE3")}
+                {this.createSquare("boxF3")}
+                {this.createSquare("boxG3")}
+                {this.createSquare("boxH3")}
+                
+
+                <div id = "box" className="box">
+                  <i>2</i>
+                </div>
+                {this.createSquare("boxA2")}
+                {this.createSquare("boxB2")}
+                {this.createSquare("boxC2")}
+                {this.createSquare("boxD2")}
+                {this.createSquare("boxE2")}
+                {this.createSquare("boxF2")}
+                {this.createSquare("boxG2")}
+                {this.createSquare("boxH2")}
+                
+
+                <div id = "box" className="box">
+                  <i>1</i>
+                </div> 
+                {this.createSquare("boxA1")}
+                {this.createSquare("boxB1")}
+                {this.createSquare("boxC1")}
+                {this.createSquare("boxD1")}
+                {this.createSquare("boxE1")}
+                {this.createSquare("boxF1")}
+                {this.createSquare("boxG1")}
+                {this.createSquare("boxH1")}
+
+                <div id = "box" className="box">
+                  <i></i>
+                </div> 
+                <div id = "box" className="box">
+                  <i>A</i>
+                </div> 
+                <div id = "box" className="box">
+                  <i>B</i>
+                </div> 
+                <div id = "box" className="box">
+                  <i>C</i>
+                </div> 
+                <div id = "box" className="box">
+                  <i>D</i>
+                </div> 
+                <div id = "box" className="box">
+                  <i>E</i>
+                </div> 
+                <div id = "box" className="box">
+                  <i>F</i>
+                </div> 
+                <div id = "box" className="box">
+                  <i>G</i>
+                </div> 
+                <div id = "box" className="box">
+                  <i>H</i>
+                </div> 
+
+                
+
+                
               </div>
-              {this.createSquare("boxA8")}
-              {this.createSquare("boxB8")}
-              {this.createSquare("boxC8")}
-              {this.createSquare("boxD8")}
-              {this.createSquare("boxE8")}
-              {this.createSquare("boxF8")}
-              {this.createSquare("boxG8")}
-              {this.createSquare("boxH8")}
-              
+              <div id="menu" className="container">
+                <label>               
+                  Remaining time: {this.state.minutes}:{this.state.seconds}
+                </label>
+                <br />
+                <br/>
 
-              <div id = "box" className="box">
-                <i>7</i>
-              </div> 
-              {this.createSquare("boxA7")}
-              {this.createSquare("boxB7")}
-              {this.createSquare("boxC7")}
-              {this.createSquare("boxD7")}
-              {this.createSquare("boxE7")}
-              {this.createSquare("boxF7")}
-              {this.createSquare("boxG7")}
-              {this.createSquare("boxH7")}
+                <label>Box to find: <br/>{this.state.random}</label>
+                <br/>
+                <label>Score: <br/>{this.state.score}</label>
+                <br/>
 
-              <div id = "box" className="box">
-                <i>6</i>
-              </div> 
-              {this.createSquare("boxA6")}
-              {this.createSquare("boxB6")}
-              {this.createSquare("boxC6")}
-              {this.createSquare("boxD6")}
-              {this.createSquare("boxE6")}
-              {this.createSquare("boxF6")}
-              {this.createSquare("boxG6")}
-              {this.createSquare("boxH6")}
-
-              <div id = "box" className="box">
-                <i>5</i>
-              </div> 
-              {this.createSquare("boxA5")}
-              {this.createSquare("boxB5")}
-              {this.createSquare("boxC5")}
-              {this.createSquare("boxD5")}
-              {this.createSquare("boxE5")}
-              {this.createSquare("boxF5")}
-              {this.createSquare("boxG5")}
-              {this.createSquare("boxH5")}
-              
-
-              <div id = "box" className="box">
-                <i>4</i>
+                <button id="startANewGameBtn" onClick = {() => this.startGame()}> Start a new game or Restart </button>
               </div>
-              {this.createSquare("boxA4")}
-              {this.createSquare("boxB4")}
-              {this.createSquare("boxC4")}
-              {this.createSquare("boxD4")}
-              {this.createSquare("boxE4")}
-              {this.createSquare("boxF4")}
-              {this.createSquare("boxG4")}
-              {this.createSquare("boxH4")}
-              
-
-              <div id = "box" className="box">
-                <i>3</i>
-              </div>
-              {this.createSquare("boxA3")}
-              {this.createSquare("boxB3")}
-              {this.createSquare("boxC3")}
-              {this.createSquare("boxD3")}
-              {this.createSquare("boxE3")}
-              {this.createSquare("boxF3")}
-              {this.createSquare("boxG3")}
-              {this.createSquare("boxH3")}
-              
-
-              <div id = "box" className="box">
-                <i>2</i>
-              </div>
-              {this.createSquare("boxA2")}
-              {this.createSquare("boxB2")}
-              {this.createSquare("boxC2")}
-              {this.createSquare("boxD2")}
-              {this.createSquare("boxE2")}
-              {this.createSquare("boxF2")}
-              {this.createSquare("boxG2")}
-              {this.createSquare("boxH2")}
-              
-
-              <div id = "box" className="box">
-                <i>1</i>
-              </div> 
-              {this.createSquare("boxA1")}
-              {this.createSquare("boxB1")}
-              {this.createSquare("boxC1")}
-              {this.createSquare("boxD1")}
-              {this.createSquare("boxE1")}
-              {this.createSquare("boxF1")}
-              {this.createSquare("boxG1")}
-              {this.createSquare("boxH1")}
-
-              <div id = "box" className="box">
-                <i></i>
-              </div> 
-              <div id = "box" className="box">
-                <i>A</i>
-              </div> 
-              <div id = "box" className="box">
-                <i>B</i>
-              </div> 
-              <div id = "box" className="box">
-                <i>C</i>
-              </div> 
-              <div id = "box" className="box">
-                <i>D</i>
-              </div> 
-              <div id = "box" className="box">
-                <i>E</i>
-              </div> 
-              <div id = "box" className="box">
-                <i>F</i>
-              </div> 
-              <div id = "box" className="box">
-                <i>G</i>
-              </div> 
-              <div id = "box" className="box">
-                <i>H</i>
-              </div> 
-
-              
-            </div>
-            <div id="menu" className="container">
-              <label>               
-                Remaining time: {this.state.minutes}:{this.state.seconds}
-              </label>
-              <br />
-              <br/>
-
-              <label>Box to find: <br/>{this.state.random}</label>
-              <br/>
-              <label>Score: <br/>{this.state.score}</label>
-              <br/>
-
-              <button id="startANewGameBtn" onClick = {() => this.startGame()}> Start a new game! </button>
-            </div>
-            <div id="menu" className="container">
+              <div id="nose" className="container">
                 <ul>
                   {this.state.register.map(item => (
                     <li key={item.index}>{item.text}</li>
@@ -297,6 +299,7 @@
                 </ul>
               </div>
           </div>
+          
             );
         }
       }
