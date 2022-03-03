@@ -20,11 +20,11 @@ button {
 }
 
 i{
-    size: 100px;
-    font-size: 100px;
+    size: 50px;
+    font-size: 50px;
 }
 
 #boardDiv{
   grid-column: 1;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
