@@ -40,200 +40,228 @@
       //Class for the good ones: bi bi-check
       //Class for the bad ones: bi bi-x
 
-      const App = () => <FullScreen />;
+      const App = () => <Board/>;
 
-      class FullScreen extends React.Component {
-        render() {
+      function Square(props) {
           return (
-            <div className = "container">
-              <Board/>
-              <Menu/>
+            <div id = "box" className="box" onClick={props.onClick}>
+              <i id="icon" className="bi bi-question" />
             </div>
           );
-        }
       }
 
       class Board extends React.Component {
-        //Horizontal
-        render() {
-          return( 
-            <div id = "boardDiv" className="container"> 
-
-              <Square id ="boxA1"></Square>
-              <Square id ="boxB1"></Square>
-              <Square id ="boxC1"></Square>
-              <Square id ="boxD1"></Square>
-              <Square id ="boxE1"></Square>
-              <Square id ="boxF1"></Square>
-              <Square id ="boxG1"></Square>
-              <Square id ="boxH1"></Square>
-
-              <Square id ="boxA2"></Square>
-              <Square id ="boxB2"></Square>
-              <Square id ="boxC2"></Square>
-              <Square id ="boxD2"></Square>
-              <Square id ="boxE2"></Square>
-              <Square id ="boxF2"></Square>
-              <Square id ="boxG2"></Square>
-              <Square id ="boxH2"></Square>
-
-              <Square id ="boxA3"></Square>
-              <Square id ="boxB3"></Square>
-              <Square id ="boxC3"></Square>
-              <Square id ="boxD3"></Square>
-              <Square id ="boxE3"></Square>
-              <Square id ="boxF3"></Square>
-              <Square id ="boxG3"></Square>
-              <Square id ="boxH3"></Square>
-
-              <Square id ="boxA4"></Square>
-              <Square id ="boxB4"></Square>
-              <Square id ="boxC4"></Square>
-              <Square id ="boxD4"></Square>
-              <Square id ="boxE4"></Square>
-              <Square id ="boxF4"></Square>
-              <Square id ="boxG4"></Square>
-              <Square id ="boxH4"></Square>
-
-              <Square id ="boxA5"></Square>
-              <Square id ="boxB5"></Square>
-              <Square id ="boxC5"></Square>
-              <Square id ="boxD5"></Square>
-              <Square id ="boxE5"></Square>
-              <Square id ="boxF5"></Square>
-              <Square id ="boxG5"></Square>
-              <Square id ="boxH5"></Square>
-
-              <Square id ="boxA6"></Square>
-              <Square id ="boxB6"></Square>
-              <Square id ="boxC6"></Square>
-              <Square id ="boxD6"></Square>
-              <Square id ="boxE6"></Square>
-              <Square id ="boxF6"></Square>
-              <Square id ="boxG6"></Square>
-              <Square id ="boxH6"></Square>
-
-              <Square id ="boxA7"></Square>
-              <Square id ="boxB7"></Square>
-              <Square id ="boxC7"></Square>
-              <Square id ="boxD7"></Square>
-              <Square id ="boxE7"></Square>
-              <Square id ="boxF7"></Square>
-              <Square id ="boxG7"></Square>
-              <Square id ="boxH7"></Square>
-
-              <Square id ="boxA8"></Square>
-              <Square id ="boxB8"></Square>
-              <Square id ="boxC8"></Square>
-              <Square id ="boxD8"></Square>
-              <Square id ="boxE8"></Square>
-              <Square id ="boxF8"></Square>
-              <Square id ="boxG8"></Square>
-              <Square id ="boxH8"></Square>
-
-            </div>
-            );
-        }
-      }
-
-      class Menu extends React.Component {
-        changeBox(){
-          let box = document.getElementById("boxToFind");
-          
-          let a = Math.floor(Math.random() * 9);
-          let b = Math.floor(Math.random() * 9);
-          let c = String.fromCharCode(b+65);
-          if(a==0){
-            a=1;
-          }
-
-          box.textContent = c+a;
-          document.getElementById("startANewGameBtn").disabled = true;
-        }
-        
-        
-
-        render() {
-          return (
-            <div id="menu" className="container">
-              <label>               
-                Remaining time: <Timer />
-              </label>
-              <br />
-              <br/>
-
-              <label>Box to find: <br/><label id = "boxToFind"/></label>
-
-              <br/>
-              <br/>
-
-              <button id="startANewGameBtn" onClick = {this.changeBox}> Start a new game! </button>
-            </div>
-          );
-        }
-      }
-
-      class Square extends React.Component {
         constructor(props) {
           super(props);
-          this.state = {
-            highlighted: 0,
-            iconClass: "bi bi-question",
-          };
+            this.state = {
+              score: 0,
+              random: '  ',
+              turn: 0,
+              register: [],
+              clickTime: 0,
+              lastClick: 60,
+              start: false,
+              minutes: 1,
+              seconds: 0
+            };
         }
 
-        divClicked(){
-          let boxToFind = document.getElementById("boxToFind")
-
-          //Aquí se necesita verificar que el id del elemento que haya causado el evento(al que le hayan dado click) 
-          // tenga el mismo id que tiene escrito en el label de boxToFind. (Los id's de las casillas van "box*Valor_del_label*")
+        createSquare(e){
+          return 
+          <Square
+            onClick= {() => this.handleClick(e)}
+          />;
         }
 
-        render() {
-          return (
-            <div id = "box" className="box" onClick={this.divClicked}>
-              <i id="icon" className={this.state.iconClass} />
-            </div>
-          );
+        startGame(){
+          this.state.start=true;
+          this.state.lastClick=60;
+          this.state.seconds = 0;
+          this.state.minutes = 1;
+          this.state.score = 0;
+          this.state.random = generateRandomBox();
+          this.state.register=[];
+          this.state.turn=0;
         }
-      }
 
-      class Timer extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = { minutes: 1, seconds: 0, steticZero: "0" };
-        }
-        tick() {
-          this.setState((state) => ({
-            seconds: state.seconds - 1,
-          }));
-          if(this.state.minutes==0 && this.state.seconds==0){
-              clearInterval(this.interval);
-            }
-          if (this.state.seconds < 0) {
-            this.setState((state) => ({
-              seconds: 59,
-              minutes: state.minutes - 1,
-            }));
-          }
-        }
         componentDidMount() {
           this.interval = setInterval(() => this.tick(), 1000);
-          this.state.steticZero = "";
         }
 
         componentWillUnmount() {
           clearInterval(this.interval);
         }
 
-        render() {
-          return (
-            <div>
-              {this.state.minutes}:{this.state.seconds}
-              {this.state.steticZero}
-            </div>
-          );
+        tick() {
+          if(this.state.start){
+            if(!(this.state.minutes==0 && this.state.seconds==0)){
+              this.setState((state) => ({
+                seconds: state.seconds - 1,
+              }));
+              if (this.state.seconds < 0) {
+                this.setState((state) => ({
+                  seconds: 59,
+                  minutes: state.minutes - 1,
+                }));
+              }
+            } 
+          }
+          
         }
+
+        handleClick(e){
+          if(start){
+            if(!checkEnd(this.state.minutes,this.state.seconds)){
+              this.state.clickTime = this.state.lastClick - this.state.seconds;
+                  this.state.lastClick = this.state.seconds;
+              if(boxEqualsRandom("box"+random,e)){
+                  this.state.lastClick = this.state.seconds;
+                  const info = {
+                    text: "Requested: "+this.state.random+" Time: "+this.state.clickTime+"✓",
+                    index: this.state.turn
+                  }
+                  this.state.register = this.state.register.concat(info);
+              }
+              else{
+                  const info = {
+                    text: "Requested: "+this.state.random+" Time: "+this.state.clickTime+"X",
+                    index: this.state.turn
+                  }
+                  this.state.register = this.state.register.concat(info);
+              }
+              this.state.turn = this.state.turn+1;
+              this.state.random = generateRandomBox();
+            }
+            alert('Game over. Final Score: ${this.state.score}')
+          }
+          return;
+        }
+
+        render() {
+          return( 
+            <div className = "container">
+            <div id = "boardDiv" className="container"> 
+
+              {this.createSquare("boxA1")}
+              {this.createSquare("boxB1")}
+              {this.createSquare("boxC1")}
+              {this.createSquare("boxD1")}
+              {this.createSquare("boxE1")}
+              {this.createSquare("boxF1")}
+              {this.createSquare("boxG1")}
+              {this.createSquare("boxH1")}
+
+              {this.createSquare("boxA2")}
+              {this.createSquare("boxB2")}
+              {this.createSquare("boxC2")}
+              {this.createSquare("boxD2")}
+              {this.createSquare("boxE2")}
+              {this.createSquare("boxF2")}
+              {this.createSquare("boxG2")}
+              {this.createSquare("boxH2")}
+
+              {this.createSquare("boxA3")}
+              {this.createSquare("boxB3")}
+              {this.createSquare("boxC3")}
+              {this.createSquare("boxD3")}
+              {this.createSquare("boxE3")}
+              {this.createSquare("boxF3")}
+              {this.createSquare("boxG3")}
+              {this.createSquare("boxH3")}
+
+              {this.createSquare("boxA4")}
+              {this.createSquare("boxB4")}
+              {this.createSquare("boxC4")}
+              {this.createSquare("boxD4")}
+              {this.createSquare("boxE4")}
+              {this.createSquare("boxF4")}
+              {this.createSquare("boxG4")}
+              {this.createSquare("boxH4")}
+
+              {this.createSquare("boxA5")}
+              {this.createSquare("boxB5")}
+              {this.createSquare("boxC5")}
+              {this.createSquare("boxD5")}
+              {this.createSquare("boxE5")}
+              {this.createSquare("boxF5")}
+              {this.createSquare("boxG5")}
+              {this.createSquare("boxH5")}
+
+              {this.createSquare("boxA6")}
+              {this.createSquare("boxB6")}
+              {this.createSquare("boxC6")}
+              {this.createSquare("boxD6")}
+              {this.createSquare("boxE6")}
+              {this.createSquare("boxF6")}
+              {this.createSquare("boxG6")}
+              {this.createSquare("boxH6")}
+
+              {this.createSquare("boxA7")}
+              {this.createSquare("boxB7")}
+              {this.createSquare("boxC7")}
+              {this.createSquare("boxD7")}
+              {this.createSquare("boxE7")}
+              {this.createSquare("boxF7")}
+              {this.createSquare("boxG7")}
+              {this.createSquare("boxH7")}
+
+              {this.createSquare("boxA8")}
+              {this.createSquare("boxB8")}
+              {this.createSquare("boxC8")}
+              {this.createSquare("boxD8")}
+              {this.createSquare("boxE8")}
+              {this.createSquare("boxF8")}
+              {this.createSquare("boxG8")}
+              {this.createSquare("boxH8")}
+              
+            </div>
+            <div id="menu" className="container">
+              <label>               
+                Remaining time: {this.state.minutes}:{this.state.seconds}
+              </label>
+              <br />
+              <br/>
+
+              <label>Box to find: <br/>{this.state.random}</label>
+              <br/>
+              <br/>
+              <br/>
+
+              <button id="startANewGameBtn" onClick = {() => this.startGame()}> Start a new game! </button>
+              <ul>
+                {this.state.register.map(item => (
+                  <li key={item.index}>{item.text}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+            );
+        }
+      }
+
+      function generateRandomBox(){
+          let a = Math.floor(Math.random() * 9);
+          let b = Math.floor(Math.random() * 9);
+          let c = String.fromCharCode(b+65);
+          if(a==0){
+            a=1;
+          }
+          return a+c;
+      }
+
+      function checkEnd(minutes,seconds){
+        let end = false;
+        if(minutes == 0 && seconds == 0){
+          let end = true;
+        }
+        return end;
+      }
+
+      function boxEqualsRandom(random,box){
+        if (random===box){
+          return true;
+        }
+        return false;
       }
 
       ReactDOM.render(<App />, document.getElementById("root"));
